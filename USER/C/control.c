@@ -17,16 +17,20 @@ uint16_t ball_site[4][2] = {
 
 float g_fSpeedControlOut_X,g_fSpeedControlOutOld_X;//X方向速度环输出
 float g_fSpeedControlOut_Y,g_fSpeedControlOutOld_Y;//X方向速度环输出
+int g_nSpeedControlPeriod;//速度环控制周期计算量
 
 float x_angle, y_angle;
 
 void control(){
-      static uint32_t position_timer = 0;    // 位置环周期
+    static uint32_t position_timer = 0;    // 位置环周期
 
     static float cont_val_X = 0, cont_val_Y = 0;                  // 当前X,Y方向控制值（位置环、速度环共用）
     static int pre_Cx,pre_Cy;
 
     static int actual_speedX,actual_speedY;
+
+	if(g_nSpeedControlPeriod >= 3)
+	{
 	
 	/***********************************位置外环**************************************/
 							if (position_timer++%2 == 0)           //位置环(外环)控制频率 是 速度环(内环)控制频率 的一半
@@ -86,6 +90,12 @@ void control(){
 							x_angle = limit_angle(cont_val_X);  // 转换量程，板子倾斜角度限幅 （90度正反转动一个值）
 							y_angle = limit_angle(cont_val_Y);
 
+							g_nSpeedControlPeriod = 0;
+
+}
+
+AngleControlOutput();
+
 							Set_servo_angle(g_fSpeedControlOut_X, g_fSpeedControlOut_Y);  // 舵机控制
 }
 
@@ -111,6 +121,7 @@ Limit_speed (float val_x , float val_y)
 									val_y = -TARGET_SPEED_MAX;
 								}
 }
+
 
 void AngleControlOutput(void)    //平滑输出，将一次速度环控制拆分为三次输出，每次两个10ms周期的PWM
 {

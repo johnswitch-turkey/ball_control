@@ -65,12 +65,16 @@ void Error_Handler(void);
 #define PWMB_GPIO_Port GPIOA
 #define KEY1_Pin GPIO_PIN_3
 #define KEY1_GPIO_Port GPIOA
+#define KEY1_EXTI_IRQn EXTI3_IRQn
 #define KEY2_Pin GPIO_PIN_4
 #define KEY2_GPIO_Port GPIOA
+#define KEY2_EXTI_IRQn EXTI4_IRQn
 #define KEY3_Pin GPIO_PIN_5
 #define KEY3_GPIO_Port GPIOA
+#define KEY3_EXTI_IRQn EXTI9_5_IRQn
 #define KEY4_Pin GPIO_PIN_6
 #define KEY4_GPIO_Port GPIOA
+#define KEY4_EXTI_IRQn EXTI9_5_IRQn
 #define MPU_SCL_Pin GPIO_PIN_1
 #define MPU_SCL_GPIO_Port GPIOB
 #define MPU_SDA_Pin GPIO_PIN_2

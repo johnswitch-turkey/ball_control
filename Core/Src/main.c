@@ -25,6 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "PID.h"
 
 /* USER CODE END Includes */
 
@@ -46,7 +47,10 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+uint8_t uart4_rxbuff;
 
+
+int displayFlag = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -92,14 +96,30 @@ int main(void)
   MX_TIM2_Init();
   MX_USART1_UART_Init();
   MX_I2C1_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim1); 
+  HAL_TIM_Base_Start(&htim2);
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+  HAL_UART_Receive_IT(&huart4,&uart4_rxbuff,1);
 
+  set_p_i_d(&pid_positionX, 0.18, 0.004, 0.1);
+  set_p_i_d(&pid_positionY, 0.18, 0.004, 0.1);
+  set_p_i_d(&pid_speedX, 6.3, 0,  0.005);
+  set_p_i_d(&pid_speedY, 6.3, 0, 0.005);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    		 displayFlag++;
+		
+		if(displayFlag >= 3)  
+		{
+			displayFlag = 0;
+		     
+		}
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
