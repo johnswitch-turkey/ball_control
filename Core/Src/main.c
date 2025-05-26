@@ -47,10 +47,12 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint8_t uart4_rxbuff;
+uint8_t uart1_rxbuff;
 
 
 int displayFlag = 0;
+
+extern UART_HandleTypeDef huart1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -101,7 +103,7 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim1); 
   HAL_TIM_Base_Start(&htim2);
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-  HAL_UART_Receive_IT(&huart4,&uart4_rxbuff,1);
+  HAL_UART_Receive_IT(&huart1,&uart1_rxbuff,1);
 
   set_p_i_d(&pid_positionX, 0.18, 0.004, 0.1);
   set_p_i_d(&pid_positionY, 0.18, 0.004, 0.1);

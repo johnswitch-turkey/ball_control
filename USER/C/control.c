@@ -3,6 +3,8 @@
 #include "pid.h"
 #include "uart.h"
 #include "led.h"
+#include "servo.h"
+#include "main.h"
 
 Tar_Position target_position;
 
@@ -13,6 +15,8 @@ uint16_t ball_site[4][2] = {
 };
 
 
+//extern UART_HandleTypeDef huart4;  // 声明外部变量
+extern uint8_t uart1_rxbuff[];
 
 
 float g_fSpeedControlOut_X,g_fSpeedControlOutOld_X;//X方向速度环输出
@@ -21,10 +25,10 @@ int g_nSpeedControlPeriod;//速度环控制周期计算量
 
 float x_angle, y_angle;
 
-void control(){
+void control(void){
     static uint32_t position_timer = 0;    // 位置环周期
 
-    static float cont_val_X = 0, cont_val_Y = 0;                  // 当前X,Y方向控制值（位置环、速度环共用）
+    static float cont_val_X = 0.0, cont_val_Y = 0.0;                  // 当前X,Y方向控制值（位置环、速度环共用）
     static int pre_Cx,pre_Cy;
 
     static int actual_speedX,actual_speedY;
@@ -43,7 +47,7 @@ void control(){
 								cont_val_Y = location_pid_realize(&pid_positionY, Cy);
 								
 								/* 目标速度上限处理 */    //如果想3s内将球从一个角落滚动到另一个角落，那么在以100ms为单位时间的情况下，那么每次采样时实际坐标值差值大概为 80*0.03=2.4
-								Limit_speed (cont_val_X, cont_val_Y);   // 速度上限处理
+								Limit_speed (&cont_val_X, &cont_val_Y);   // 速度上限处理
 								
 								set_pid_target(&pid_speedX, cont_val_X);    // 设定速度的目标值 ，位置环的输出给速度内环当目标值
 								set_pid_target(&pid_speedY, cont_val_Y);
@@ -101,25 +105,35 @@ AngleControlOutput();
 
 
 
-Limit_speed (float val_x , float val_y)
+void Limit_speed (float * val_x , float * val_y)
 {
-    if (val_x > TARGET_SPEED_MAX)
+    if (* val_x > TARGET_SPEED_MAX)
 								{
-									val_x = TARGET_SPEED_MAX;   
+									* val_x = TARGET_SPEED_MAX;   
 								}
-								else if (val_x < -TARGET_SPEED_MAX)
+								else if (* val_x < -TARGET_SPEED_MAX)
 								{
-									val_x = -TARGET_SPEED_MAX;
+									* val_x = -TARGET_SPEED_MAX;
 								}
 								
-								 if (val_y > TARGET_SPEED_MAX)
+								 if (* val_y > TARGET_SPEED_MAX)
 								{
-									val_y = TARGET_SPEED_MAX;   
+									* val_y = TARGET_SPEED_MAX;   
 								}
-								else if (val_y < -TARGET_SPEED_MAX)
+								else if (* val_y < -TARGET_SPEED_MAX)
 								{
-									val_y = -TARGET_SPEED_MAX;
+									* val_y = -TARGET_SPEED_MAX;
 								}
+}
+
+
+float limit_angle(float angle)
+{
+    if(angle > 90.0f)
+        return 90.0f;
+    else if(angle < -90.0f)
+        return -90.0f;
+    return angle;
 }
 
 

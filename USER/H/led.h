@@ -4,8 +4,8 @@
 #define LED_PIN GPIO_PIN_13
 #define LED_PORT GPIOC
 
-void led_toggle();
-void led_on();
-void led_off();
+void led_toggle(void);
+void led_on(void);
+void led_off(void);
 
 #endif
