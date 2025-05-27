@@ -12,7 +12,7 @@
 
 typedef struct
 {
-    uint16_t target_position_x;               //x目标位置
+    uint16_t target_position_x;             //x目标位置
     uint16_t target_position_y;        		//y目标位置
 }Tar_Position;
 

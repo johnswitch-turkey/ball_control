@@ -21,15 +21,15 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     }
     else if (GPIO_Pin == GPIO_PIN_4) {
         target_position.target_position_x = ball_site[1][0];
-        target_position.target_position_x = ball_site[1][1];
+        target_position.target_position_y = ball_site[1][1];
     }
     else if (GPIO_Pin == GPIO_PIN_5) {
         target_position.target_position_x = ball_site[2][0];
-        target_position.target_position_x = ball_site[2][1];
+        target_position.target_position_y = ball_site[2][1];
     }
     else if (GPIO_Pin == GPIO_PIN_6) {
         target_position.target_position_x = ball_site[3][0];
-        target_position.target_position_x = ball_site[3][1];
+        target_position.target_position_y = ball_site[3][1];
     }
    
 }

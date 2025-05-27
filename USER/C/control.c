@@ -32,6 +32,8 @@ void control(void){
     static int pre_Cx,pre_Cy;
 
     static int actual_speedX,actual_speedY;
+	
+	g_nSpeedControlPeriod++;
 
 	if(g_nSpeedControlPeriod >= 3)
 	{

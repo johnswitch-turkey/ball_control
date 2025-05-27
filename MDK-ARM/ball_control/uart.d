@@ -7,7 +7,7 @@ ball_control\uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 ball_control\uart.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 ball_control\uart.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xc.h
 ball_control\uart.o: ../Drivers/CMSIS/Include/core_cm4.h
-ball_control\uart.o: D:\Programs\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+ball_control\uart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ball_control\uart.o: ../Drivers/CMSIS/Include/cmsis_version.h
 ball_control\uart.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 ball_control\uart.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -15,7 +15,7 @@ ball_control\uart.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 ball_control\uart.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 ball_control\uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 ball_control\uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-ball_control\uart.o: D:\Programs\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+ball_control\uart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 ball_control\uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 ball_control\uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 ball_control\uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h
@@ -33,6 +33,6 @@ ball_control\uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 ball_control\uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 ball_control\uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 ball_control\uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
-ball_control\uart.o: D:\Programs\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+ball_control\uart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ball_control\uart.o: ../Core/Inc/usart.h
 ball_control\uart.o: ../Core/Inc/main.h
