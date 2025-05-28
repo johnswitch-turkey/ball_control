@@ -6,27 +6,27 @@ import struct
 cap = cv2.VideoCapture(1)
 if not cap.isOpened():
         print("无法打开摄像头！")
-ser = serial.Serial('COM5', 115200)
+# ser = serial.Serial('COM5', 115200)
 
 
-def send_data_packet(cx, cy, found):
-    """发送数据帧到串口"""
-    # 坐标限幅（确保在0-255范围内）
-    cx = max(0, min(255, cx))
-    cy = max(0, min(255, cy))
-
-    # 数据打包为二进制（7字节）
-    packet = struct.pack(
-        'BBBBBBB',  # 格式：7个无符号字节
-        0x2C,       # 帧头1
-        0x12,       # 帧头2
-        cx,         # X坐标
-        cy,         # Y坐标
-        1 if found else 0,  # Finded_flag
-        0x00,       # Ch（预留）
-        0x5B        # 帧尾
-    )
-    ser.write(packet)
+# def send_data_packet(cx, cy, found):
+#     """发送数据帧到串口"""
+#     # 坐标限幅（确保在0-255范围内）
+#     cx = max(0, min(255, cx))
+#     cy = max(0, min(255, cy))
+#
+#     # 数据打包为二进制（7字节）
+#     packet = struct.pack(
+#         'BBBBBBB',  # 格式：7个无符号字节
+#         0x2C,       # 帧头1
+#         0x12,       # 帧头2
+#         cx,         # X坐标
+#         cy,         # Y坐标
+#         1 if found else 0,  # Finded_flag
+#         0x00,       # Ch（预留）
+#         0x5B        # 帧尾
+#     )
+#     ser.write(packet)
 
 def find_white_ball(image_path):
     img = image_path
@@ -34,7 +34,7 @@ def find_white_ball(image_path):
         return []
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    _, binary = cv2.threshold(gray, 245, 255, cv2.THRESH_BINARY)
+    _, binary = cv2.threshold(gray, 205, 255, cv2.THRESH_BINARY)
 
     kernel = np.ones((5, 5), np.uint8)
     binary = cv2.morphologyEx(binary, cv2.MORPH_OPEN, kernel)
@@ -79,12 +79,12 @@ while cap.isOpened():
     # 检测小球
     cx, cy, found = find_white_ball(frame)
     # 发送数据帧
-    send_data_packet(cx, cy, found)
+    # send_data_packet(cx, cy, found)
 
     # 显示结果（调试用）
     cv2.putText(frame, f"X: {cx}, Y: {cy}", (10, 30),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-    cv2.imshow('Camera', frame)
+    # cv2.imshow('Camera', frame)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
